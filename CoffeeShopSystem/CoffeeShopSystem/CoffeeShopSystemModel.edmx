@@ -1,0 +1,614 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="CoffeeShopSystemDBModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="CoffeeShopSystemDBModelStoreContainer">
+    <EntitySet Name="CommandeSet" EntityType="CoffeeShopSystemDBModel.Store.CommandeSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="CafeSet" EntityType="CoffeeShopSystemDBModel.Store.CafeSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="CaissierSet" EntityType="CoffeeShopSystemDBModel.Store.CaissierSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="BaristaSet" EntityType="CoffeeShopSystemDBModel.Store.BaristaSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="OptionSet" EntityType="CoffeeShopSystemDBModel.Store.OptionSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="TypeSet" EntityType="CoffeeShopSystemDBModel.Store.TypeSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="IngredientSet" EntityType="CoffeeShopSystemDBModel.Store.IngredientSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="TailleSet" EntityType="CoffeeShopSystemDBModel.Store.TailleSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="HistoriqueSet" EntityType="CoffeeShopSystemDBModel.Store.HistoriqueSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="CafeOption" EntityType="CoffeeShopSystemDBModel.Store.CafeOption" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="CafeIngredient" EntityType="CoffeeShopSystemDBModel.Store.CafeIngredient" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="CommandeCafe" Association="CoffeeShopSystemDBModel.Store.CommandeCafe">
+      <End Role="Commande" EntitySet="CommandeSet" />
+      <End Role="Cafe" EntitySet="CafeSet" />
+    </AssociationSet>
+    <AssociationSet Name="BaristaCommande" Association="CoffeeShopSystemDBModel.Store.BaristaCommande">
+      <End Role="Barista" EntitySet="BaristaSet" />
+      <End Role="Commande" EntitySet="CommandeSet" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CafeOption_Cafe" Association="CoffeeShopSystemDBModel.Store.FK_CafeOption_Cafe">
+      <End Role="Cafe" EntitySet="CafeSet" />
+      <End Role="CafeOption" EntitySet="CafeOption" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CafeOption_Option" Association="CoffeeShopSystemDBModel.Store.FK_CafeOption_Option">
+      <End Role="Option" EntitySet="OptionSet" />
+      <End Role="CafeOption" EntitySet="CafeOption" />
+    </AssociationSet>
+    <AssociationSet Name="CafeType" Association="CoffeeShopSystemDBModel.Store.CafeType">
+      <End Role="Cafe" EntitySet="CafeSet" />
+      <End Role="Type" EntitySet="TypeSet" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CafeIngredient_Cafe" Association="CoffeeShopSystemDBModel.Store.FK_CafeIngredient_Cafe">
+      <End Role="Cafe" EntitySet="CafeSet" />
+      <End Role="CafeIngredient" EntitySet="CafeIngredient" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CafeIngredient_Ingredient" Association="CoffeeShopSystemDBModel.Store.FK_CafeIngredient_Ingredient">
+      <End Role="Ingredient" EntitySet="IngredientSet" />
+      <End Role="CafeIngredient" EntitySet="CafeIngredient" />
+    </AssociationSet>
+    <AssociationSet Name="CafeTaille" Association="CoffeeShopSystemDBModel.Store.CafeTaille">
+      <End Role="Cafe" EntitySet="CafeSet" />
+      <End Role="Taille" EntitySet="TailleSet" />
+    </AssociationSet>
+    <AssociationSet Name="CaissierCommande" Association="CoffeeShopSystemDBModel.Store.CaissierCommande">
+      <End Role="Caissier" EntitySet="CaissierSet" />
+      <End Role="Commande" EntitySet="CommandeSet" />
+    </AssociationSet>
+    <AssociationSet Name="FK_HistoriqueCommande" Association="CoffeeShopSystemDBModel.Store.FK_HistoriqueCommande">
+      <End Role="Commande" EntitySet="CommandeSet" />
+      <End Role="HistoriqueSet" EntitySet="HistoriqueSet" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="CommandeSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nomClient" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="date" Type="datetime" Nullable="false" />
+    <Property Name="commentaire" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="statut" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="duree" Type="int" Nullable="true" />
+    <Property Name="Barista_Id" Type="int" Nullable="false" />
+    <Property Name="Caissier_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CafeSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="libelle" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="tempsPreparation" Type="int" Nullable="false" />
+    <Property Name="Commande_Id" Type="int" Nullable="false" />
+    <Property Name="Type_Id" Type="int" Nullable="false" />
+    <Property Name="Taille_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CaissierSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="matricule" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="nomPrenom" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="horaires" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="BaristaSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="matricule" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="nomPrenom" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="horaires" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="OptionSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="libelle" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TypeSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="libelle" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="IngredientSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="libelle" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TailleSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="libelle" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="HistoriqueSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Commande_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CafeOption">
+    <Key>
+      <PropertyRef Name="Cafe_Id" />
+      <PropertyRef Name="Option_Id" />
+    </Key>
+    <Property Name="Cafe_Id" Type="int" Nullable="false" />
+    <Property Name="Option_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CafeIngredient">
+    <Key>
+      <PropertyRef Name="Cafe_Id" />
+      <PropertyRef Name="Ingredient_Id" />
+    </Key>
+    <Property Name="Cafe_Id" Type="int" Nullable="false" />
+    <Property Name="Ingredient_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="CommandeCafe">
+    <End Role="Commande" Type="CoffeeShopSystemDBModel.Store.CommandeSet" Multiplicity="1" />
+    <End Role="Cafe" Type="CoffeeShopSystemDBModel.Store.CafeSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Commande">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Cafe">
+        <PropertyRef Name="Commande_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="BaristaCommande">
+    <End Role="Barista" Type="CoffeeShopSystemDBModel.Store.BaristaSet" Multiplicity="1" />
+    <End Role="Commande" Type="CoffeeShopSystemDBModel.Store.CommandeSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Barista">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Commande">
+        <PropertyRef Name="Barista_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="CafeType">
+    <End Role="Cafe" Type="CoffeeShopSystemDBModel.Store.CafeSet" Multiplicity="*" />
+    <End Role="Type" Type="CoffeeShopSystemDBModel.Store.TypeSet" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Type">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Cafe">
+        <PropertyRef Name="Type_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="CafeTaille">
+    <End Role="Cafe" Type="CoffeeShopSystemDBModel.Store.CafeSet" Multiplicity="*" />
+    <End Role="Taille" Type="CoffeeShopSystemDBModel.Store.TailleSet" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Taille">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Cafe">
+        <PropertyRef Name="Taille_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="CaissierCommande">
+    <End Role="Caissier" Type="CoffeeShopSystemDBModel.Store.CaissierSet" Multiplicity="1" />
+    <End Role="Commande" Type="CoffeeShopSystemDBModel.Store.CommandeSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Caissier">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Commande">
+        <PropertyRef Name="Caissier_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_HistoriqueCommande">
+    <End Role="Commande" Type="CoffeeShopSystemDBModel.Store.CommandeSet" Multiplicity="1" />
+    <End Role="HistoriqueSet" Type="CoffeeShopSystemDBModel.Store.HistoriqueSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Commande">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="HistoriqueSet">
+        <PropertyRef Name="Commande_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CafeOption_Cafe">
+    <End Role="Cafe" Type="CoffeeShopSystemDBModel.Store.CafeSet" Multiplicity="1" />
+    <End Role="CafeOption" Type="CoffeeShopSystemDBModel.Store.CafeOption" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cafe">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CafeOption">
+        <PropertyRef Name="Cafe_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CafeOption_Option">
+    <End Role="CafeOption" Type="CoffeeShopSystemDBModel.Store.CafeOption" Multiplicity="*" />
+    <End Role="Option" Type="CoffeeShopSystemDBModel.Store.OptionSet" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Option">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CafeOption">
+        <PropertyRef Name="Option_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CafeIngredient_Cafe">
+    <End Role="Cafe" Type="CoffeeShopSystemDBModel.Store.CafeSet" Multiplicity="1" />
+    <End Role="CafeIngredient" Type="CoffeeShopSystemDBModel.Store.CafeIngredient" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cafe">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CafeIngredient">
+        <PropertyRef Name="Cafe_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CafeIngredient_Ingredient">
+    <End Role="CafeIngredient" Type="CoffeeShopSystemDBModel.Store.CafeIngredient" Multiplicity="*" />
+    <End Role="Ingredient" Type="CoffeeShopSystemDBModel.Store.IngredientSet" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Ingredient">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CafeIngredient">
+        <PropertyRef Name="Ingredient_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="CoffeeShopSystemDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="CoffeeShopSystemDBEntities" annotation:LazyLoadingEnabled="true" >
+          <EntitySet Name="CommandeSet" EntityType="CoffeeShopSystemDBModel.Commande" />
+          <EntitySet Name="CafeSet" EntityType="CoffeeShopSystemDBModel.Cafe" />
+          <EntitySet Name="CaissierSet" EntityType="CoffeeShopSystemDBModel.Caissier" />
+          <EntitySet Name="BaristaSet" EntityType="CoffeeShopSystemDBModel.Barista" />
+          <EntitySet Name="OptionSet" EntityType="CoffeeShopSystemDBModel.Option" />
+          <EntitySet Name="TypeSet" EntityType="CoffeeShopSystemDBModel.Type" />
+          <EntitySet Name="IngredientSet" EntityType="CoffeeShopSystemDBModel.Ingredient" />
+          <EntitySet Name="TailleSet" EntityType="CoffeeShopSystemDBModel.Taille" />
+          <AssociationSet Name="CommandeCafe" Association="CoffeeShopSystemDBModel.CommandeCafe">
+            <End Role="Commande" EntitySet="CommandeSet" />
+            <End Role="Cafe" EntitySet="CafeSet" />
+          </AssociationSet>
+          <AssociationSet Name="BaristaCommande" Association="CoffeeShopSystemDBModel.BaristaCommande">
+            <End Role="Barista" EntitySet="BaristaSet" />
+            <End Role="Commande" EntitySet="CommandeSet" />
+          </AssociationSet>
+          <AssociationSet Name="CafeOption" Association="CoffeeShopSystemDBModel.CafeOption">
+            <End Role="Cafe" EntitySet="CafeSet" />
+            <End Role="Option" EntitySet="OptionSet" />
+          </AssociationSet>
+          <AssociationSet Name="CafeType" Association="CoffeeShopSystemDBModel.CafeType">
+            <End Role="Cafe" EntitySet="CafeSet" />
+            <End Role="Type" EntitySet="TypeSet" />
+          </AssociationSet>
+          <AssociationSet Name="CafeIngredient" Association="CoffeeShopSystemDBModel.CafeIngredient">
+            <End Role="Cafe" EntitySet="CafeSet" />
+            <End Role="Ingredient" EntitySet="IngredientSet" />
+          </AssociationSet>
+          <AssociationSet Name="CafeTaille" Association="CoffeeShopSystemDBModel.CafeTaille">
+            <End Role="Cafe" EntitySet="CafeSet" />
+            <End Role="Taille" EntitySet="TailleSet" />
+          </AssociationSet>
+          <AssociationSet Name="CaissierCommande" Association="CoffeeShopSystemDBModel.CaissierCommande">
+            <End Role="Caissier" EntitySet="CaissierSet" />
+            <End Role="Commande" EntitySet="CommandeSet" />
+          </AssociationSet>
+          <EntitySet Name="HistoriqueSet" EntityType="CoffeeShopSystemDBModel.HistoriqueSet" />
+          <AssociationSet Name="FK_HistoriqueCommande" Association="CoffeeShopSystemDBModel.FK_HistoriqueCommande">
+            <End Role="Commande" EntitySet="CommandeSet" />
+            <End Role="HistoriqueSet" EntitySet="HistoriqueSet" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Commande">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nomClient" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="commentaire" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="statut" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Cafe" Relationship="CoffeeShopSystemDBModel.CommandeCafe" FromRole="Commande" ToRole="Cafe" />
+          <NavigationProperty Name="Barista" Relationship="CoffeeShopSystemDBModel.BaristaCommande" FromRole="Commande" ToRole="Barista" />
+          <NavigationProperty Name="Caissier" Relationship="CoffeeShopSystemDBModel.CaissierCommande" FromRole="Commande" ToRole="Caissier" />
+          <NavigationProperty Name="HistoriqueSet" Relationship="CoffeeShopSystemDBModel.FK_HistoriqueCommande" FromRole="Commande" ToRole="HistoriqueSet" />
+          <Property Name="duree" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Cafe">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="libelle" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="tempsPreparation" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Commande" Relationship="CoffeeShopSystemDBModel.CommandeCafe" FromRole="Cafe" ToRole="Commande" />
+          <NavigationProperty Name="Option" Relationship="CoffeeShopSystemDBModel.CafeOption" FromRole="Cafe" ToRole="Option" />
+          <NavigationProperty Name="Type" Relationship="CoffeeShopSystemDBModel.CafeType" FromRole="Cafe" ToRole="Type" />
+          <NavigationProperty Name="Ingredient" Relationship="CoffeeShopSystemDBModel.CafeIngredient" FromRole="Cafe" ToRole="Ingredient" />
+          <NavigationProperty Name="Taille" Relationship="CoffeeShopSystemDBModel.CafeTaille" FromRole="Cafe" ToRole="Taille" />
+        </EntityType>
+        <EntityType Name="Caissier">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="matricule" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="nomPrenom" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="horaires" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Commande" Relationship="CoffeeShopSystemDBModel.CaissierCommande" FromRole="Caissier" ToRole="Commande" />
+        </EntityType>
+        <EntityType Name="Barista">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="matricule" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="nomPrenom" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="horaires" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Commande" Relationship="CoffeeShopSystemDBModel.BaristaCommande" FromRole="Barista" ToRole="Commande" />
+        </EntityType>
+        <EntityType Name="Option">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="libelle" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Cafe" Relationship="CoffeeShopSystemDBModel.CafeOption" FromRole="Option" ToRole="Cafe" />
+        </EntityType>
+        <EntityType Name="Type">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="libelle" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Cafe" Relationship="CoffeeShopSystemDBModel.CafeType" FromRole="Type" ToRole="Cafe" />
+        </EntityType>
+        <EntityType Name="Ingredient">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="libelle" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Cafe" Relationship="CoffeeShopSystemDBModel.CafeIngredient" FromRole="Ingredient" ToRole="Cafe" />
+        </EntityType>
+        <EntityType Name="Taille">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="libelle" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Cafe" Relationship="CoffeeShopSystemDBModel.CafeTaille" FromRole="Taille" ToRole="Cafe" />
+        </EntityType>
+        <Association Name="CommandeCafe">
+          <End Type="CoffeeShopSystemDBModel.Commande" Role="Commande" Multiplicity="1" />
+          <End Type="CoffeeShopSystemDBModel.Cafe" Role="Cafe" Multiplicity="*" />
+        </Association>
+        <Association Name="BaristaCommande">
+          <End Type="CoffeeShopSystemDBModel.Barista" Role="Barista" Multiplicity="1" />
+          <End Type="CoffeeShopSystemDBModel.Commande" Role="Commande" Multiplicity="*" />
+        </Association>
+        <Association Name="CafeOption">
+          <End Type="CoffeeShopSystemDBModel.Cafe" Role="Cafe" Multiplicity="*" />
+          <End Type="CoffeeShopSystemDBModel.Option" Role="Option" Multiplicity="*" />
+        </Association>
+        <Association Name="CafeType">
+          <End Type="CoffeeShopSystemDBModel.Cafe" Role="Cafe" Multiplicity="1" />
+          <End Type="CoffeeShopSystemDBModel.Type" Role="Type" Multiplicity="1" />
+        </Association>
+        <Association Name="CafeIngredient">
+          <End Type="CoffeeShopSystemDBModel.Cafe" Role="Cafe" Multiplicity="*" />
+          <End Type="CoffeeShopSystemDBModel.Ingredient" Role="Ingredient" Multiplicity="*" />
+        </Association>
+        <Association Name="CafeTaille">
+          <End Type="CoffeeShopSystemDBModel.Cafe" Role="Cafe" Multiplicity="1" />
+          <End Type="CoffeeShopSystemDBModel.Taille" Role="Taille" Multiplicity="1" />
+        </Association>
+        <Association Name="CaissierCommande">
+          <End Type="CoffeeShopSystemDBModel.Caissier" Role="Caissier" Multiplicity="1" />
+          <End Type="CoffeeShopSystemDBModel.Commande" Role="Commande" Multiplicity="*" />
+        </Association>
+        <EntityType Name="HistoriqueSet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Commande_Id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="CommandeSet" Relationship="CoffeeShopSystemDBModel.FK_HistoriqueCommande" FromRole="HistoriqueSet" ToRole="Commande" />
+        </EntityType>
+        <Association Name="FK_HistoriqueCommande">
+          <End Type="CoffeeShopSystemDBModel.Commande" Role="Commande" Multiplicity="1" />
+          <End Type="CoffeeShopSystemDBModel.HistoriqueSet" Role="HistoriqueSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Commande">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="HistoriqueSet">
+              <PropertyRef Name="Commande_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="CoffeeShopSystemDBModelStoreContainer" CdmEntityContainer="CoffeeShopSystemDBEntities">
+    <EntitySetMapping Name="CommandeSet">
+      <EntityTypeMapping TypeName="IsTypeOf(CoffeeShopSystemDBModel.Commande)">
+        <MappingFragment StoreEntitySet="CommandeSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="nomClient" ColumnName="nomClient" />
+          <ScalarProperty Name="date" ColumnName="date" />
+          <ScalarProperty Name="commentaire" ColumnName="commentaire" />
+          <ScalarProperty Name="statut" ColumnName="statut" />
+          <ScalarProperty Name="duree" ColumnName="duree" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CafeSet">
+      <EntityTypeMapping TypeName="IsTypeOf(CoffeeShopSystemDBModel.Cafe)">
+        <MappingFragment StoreEntitySet="CafeSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="libelle" ColumnName="libelle" />
+          <ScalarProperty Name="tempsPreparation" ColumnName="tempsPreparation" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CaissierSet">
+      <EntityTypeMapping TypeName="IsTypeOf(CoffeeShopSystemDBModel.Caissier)">
+        <MappingFragment StoreEntitySet="CaissierSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="matricule" ColumnName="matricule" />
+          <ScalarProperty Name="nomPrenom" ColumnName="nomPrenom" />
+          <ScalarProperty Name="horaires" ColumnName="horaires" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BaristaSet">
+      <EntityTypeMapping TypeName="IsTypeOf(CoffeeShopSystemDBModel.Barista)">
+        <MappingFragment StoreEntitySet="BaristaSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="matricule" ColumnName="matricule" />
+          <ScalarProperty Name="nomPrenom" ColumnName="nomPrenom" />
+          <ScalarProperty Name="horaires" ColumnName="horaires" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OptionSet">
+      <EntityTypeMapping TypeName="IsTypeOf(CoffeeShopSystemDBModel.Option)">
+        <MappingFragment StoreEntitySet="OptionSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="libelle" ColumnName="libelle" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TypeSet">
+      <EntityTypeMapping TypeName="IsTypeOf(CoffeeShopSystemDBModel.Type)">
+        <MappingFragment StoreEntitySet="TypeSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="libelle" ColumnName="libelle" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="IngredientSet">
+      <EntityTypeMapping TypeName="IsTypeOf(CoffeeShopSystemDBModel.Ingredient)">
+        <MappingFragment StoreEntitySet="IngredientSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="libelle" ColumnName="libelle" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TailleSet">
+      <EntityTypeMapping TypeName="IsTypeOf(CoffeeShopSystemDBModel.Taille)">
+        <MappingFragment StoreEntitySet="TailleSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="libelle" ColumnName="libelle" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="HistoriqueSet">
+      <EntityTypeMapping TypeName="IsTypeOf(CoffeeShopSystemDBModel.HistoriqueSet)">
+        <MappingFragment StoreEntitySet="HistoriqueSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Commande_Id" ColumnName="Commande_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="CommandeCafe" TypeName="CoffeeShopSystemDBModel.CommandeCafe" StoreEntitySet="CafeSet">
+      <EndProperty Name="Commande">
+        <ScalarProperty Name="Id" ColumnName="Commande_Id" />
+      </EndProperty>
+      <EndProperty Name="Cafe">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="BaristaCommande" TypeName="CoffeeShopSystemDBModel.BaristaCommande" StoreEntitySet="CommandeSet">
+      <EndProperty Name="Barista">
+        <ScalarProperty Name="Id" ColumnName="Barista_Id" />
+      </EndProperty>
+      <EndProperty Name="Commande">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="CafeOption" TypeName="CoffeeShopSystemDBModel.CafeOption" StoreEntitySet="CafeOption">
+      <EndProperty Name="Cafe">
+        <ScalarProperty Name="Id" ColumnName="Cafe_Id" />
+      </EndProperty>
+      <EndProperty Name="Option">
+        <ScalarProperty Name="Id" ColumnName="Option_Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="CafeType" TypeName="CoffeeShopSystemDBModel.CafeType" StoreEntitySet="CafeSet">
+      <EndProperty Name="Type">
+        <ScalarProperty Name="Id" ColumnName="Type_Id" />
+      </EndProperty>
+      <EndProperty Name="Cafe">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="CafeIngredient" TypeName="CoffeeShopSystemDBModel.CafeIngredient" StoreEntitySet="CafeIngredient">
+      <EndProperty Name="Cafe">
+        <ScalarProperty Name="Id" ColumnName="Cafe_Id" />
+      </EndProperty>
+      <EndProperty Name="Ingredient">
+        <ScalarProperty Name="Id" ColumnName="Ingredient_Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="CafeTaille" TypeName="CoffeeShopSystemDBModel.CafeTaille" StoreEntitySet="CafeSet">
+      <EndProperty Name="Taille">
+        <ScalarProperty Name="Id" ColumnName="Taille_Id" />
+      </EndProperty>
+      <EndProperty Name="Cafe">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="CaissierCommande" TypeName="CoffeeShopSystemDBModel.CaissierCommande" StoreEntitySet="CommandeSet">
+      <EndProperty Name="Caissier">
+        <ScalarProperty Name="Id" ColumnName="Caissier_Id" />
+      </EndProperty>
+      <EndProperty Name="Commande">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Aucun" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

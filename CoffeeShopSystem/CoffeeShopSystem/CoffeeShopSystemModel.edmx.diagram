@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="76055a548f9d4c56bb3e11aef91606ed" Name="Diagram1" ZoomLevel="77" >
+        <EntityTypeShape EntityType="CoffeeShopSystemDBModel.Commande" Width="1.5" PointX="6.125" PointY="4" />
+        <EntityTypeShape EntityType="CoffeeShopSystemDBModel.Cafe" Width="1.5" PointX="9.25" PointY="5.375" />
+        <EntityTypeShape EntityType="CoffeeShopSystemDBModel.Caissier" Width="1.5" PointX="2.125" PointY="2.875" />
+        <EntityTypeShape EntityType="CoffeeShopSystemDBModel.Barista" Width="1.5" PointX="2.125" PointY="5.375" />
+        <EntityTypeShape EntityType="CoffeeShopSystemDBModel.Option" Width="1.5" PointX="13" PointY="4.125" />
+        <EntityTypeShape EntityType="CoffeeShopSystemDBModel.Type" Width="1.5" PointX="13" PointY="6.375" />
+        <EntityTypeShape EntityType="CoffeeShopSystemDBModel.Ingredient" Width="1.5" PointX="8.625" PointY="9.75" />
+        <EntityTypeShape EntityType="CoffeeShopSystemDBModel.Taille" Width="1.5" PointX="13" PointY="8.375" />
+        <AssociationConnector Association="CoffeeShopSystemDBModel.CommandeCafe" />
+        <AssociationConnector Association="CoffeeShopSystemDBModel.BaristaCommande" />
+        <AssociationConnector Association="CoffeeShopSystemDBModel.CafeOption" ManuallyRouted="false" >
+        </AssociationConnector>
+        <AssociationConnector Association="CoffeeShopSystemDBModel.CafeType" />
+        <AssociationConnector Association="CoffeeShopSystemDBModel.CafeIngredient" />
+        <AssociationConnector Association="CoffeeShopSystemDBModel.CafeTaille" />
+        <AssociationConnector Association="CoffeeShopSystemDBModel.CaissierCommande" />
+        <EntityTypeShape EntityType="CoffeeShopSystemDBModel.HistoriqueSet" Width="1.5" PointX="8.375" PointY="2.625" />
+        <AssociationConnector Association="CoffeeShopSystemDBModel.FK_HistoriqueCommande" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
